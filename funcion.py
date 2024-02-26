@@ -1,5 +1,5 @@
-import tkinter as tk
-from tkinter import ttk, messagebox
+# import tkinter as tk
+# from tkinter import ttk, messagebox
 import ply.lex as lex
 import ply.yacc as yacc
 
@@ -52,8 +52,8 @@ t_AS = r'=>'
 t_OR = r'(>=|<=|==|!=|>|<)'
 
 def t_ID(t):
-    # r'[a-zA-Z_][a-zA-Z_0-9]*'
-    r'[a-zA-Z][a-zA-Z]*'
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    # r'[a-zA-Z][a-zA-Z]*'
     t.type = reserved.get(t.value, 'ID')
     return t
 
@@ -69,7 +69,7 @@ def t_NUMBER(t):
 t_ignore = ' \t\n'
 
 def t_error(t):
-    mensaje_error = f"Carácter ilegal '{t.value[0]}'"
+    mensaje_error = f"Carácter desconocido'{t.value[0]}'"
     errores.append(mensaje_error)
     t.lexer.skip(1)
 
@@ -85,7 +85,7 @@ def p_PX(p):
 def p_V(p):
     '''V : ID AS TP VL'''
         
-#FUNCION                
+#FUNCION                    
 def p_RF(p):
     '''RF : F AS ID PR LA C R LC'''
 
@@ -161,21 +161,9 @@ def p_error(p):
         errores.append("Error de sintaxis al final de la entrada")
 
 parser = yacc.yacc()
-            
-# def lex_analysis(code):
-#     lexer = lex.lex()
-#     lexer.input(code)
-
-# def syntax_analysis(code):
-#     lexer = lex.lex()
-#     parser = yacc.yacc()
-#     errors = []
-            
-#     result = parser.parse(code, lexer=lexer)
-#     return errors
 
 def analizar(texto):
-    # Asegúrate de limpiar la lista de errores antes de cada análisis
+    # limpiar la lista de errores antes de cada análisis
     errores.clear()
     lexer.input(texto)
     tokens = []
