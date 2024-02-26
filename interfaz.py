@@ -1,7 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-# Asegúrate de que el módulo analizador está en el mismo directorio y accesible
-# from funcion import lex_analysis, syntax_analysis
 import funcion
 
 
@@ -12,14 +10,13 @@ def check_code():
     for item in error_table.get_children():
         error_table.delete(item)
 
-    # Obtén el código del usuario
     code = txt.get("1.0", tk.END).strip()
     if not code:
         result_label.config(text="No hay código para verificar.")
-        return
+        return  
 
     # Realiza el análisis y obtiene los errores y tokens
-    errores, tokens = funcion.analizar(code)  # Asegúrate de que esta función es accesible y retorna errores y tokens
+    errores, tokens = funcion.analizar(code) 
     
     # Muestra los errores en la interfaz gráfica
     for error in errores:
@@ -28,7 +25,7 @@ def check_code():
     # Muestra los tokens en la interfaz gráfica
     for token_type, token_value in tokens:
         token_table.insert('', 'end', values=(token_type, token_value))
-
+    
     
 
     if not errores:
